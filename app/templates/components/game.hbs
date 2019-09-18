@@ -1,18 +1,32 @@
-<h1>hello this is the game</h1>
+<div class="flex items-center flex-col">
+  <h1 class="text-lg">Welcome to the Prisoner's Dilemma!</h1>
+  <h2>The current score is:</h2>
+  <p>Player 1: {{this.game.score.p1}}</p>
+  <p>Player 2: {{this.game.score.p2}}</p>
+  <p>
+    In the last round, Player 1 {{if this.game.previousRound.p1Cooperated 'cooperated' 'defected'}}
+    and Player 2 {{if this.game.previousRound.p2Cooperated 'cooperated' 'defected'}}
+  </p>
+</div>
 
-<h2>The current score is:</h2>
-<p>Player 1: {{this.game.score.p1}}</p>
-<p>Player 2: {{this.game.score.p2}}</p>
+<div class="flex flex-row justify-around">
+  <div class="">
+    <p>Please select a strategy for Player 1</p>
+    <Select @options={{this.strategies}} @onChange={{this.updateP1Strategy}} />
+  </div>
 
-<button
-  type="button"
-  class="btn-blue outline-none"
-  {{on 'click' this.play}}
->
-  Run
-</button>
+  <div class="">
+    <p>Please select a strategy for Player 2</p>
+    <Select @options={{this.strategies}} @onChange={{this.updateP2Strategy}} />
+  </div>
+</div>
 
-
-<p>
-  In the last round, Player 1 {{if this.game.previousRound.p1Cooperated 'cooperated' 'defected'}} and Player 2 {{if this.game.previousRound.p2Cooperated 'cooperated' 'defected'}}
-</p>
+<div class="flex justify-center">
+  <button
+    type="button"
+    class="btn-blue"
+    {{on 'click' this.play}}
+    >
+    Run
+  </button>
+</div>

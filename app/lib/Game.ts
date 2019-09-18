@@ -1,32 +1,16 @@
 import { tracked } from '@glimmer/tracking';
 import Player from './Player';
+import Strategy from './Strategy';
 
 export interface GameState {
   iteration: number;
-  p1Cooperated: boolean;
-  p2Cooperated: boolean;
+  p1Cooperated?: boolean;
+  p2Cooperated?: boolean;
 }
 
 export interface InitialGameState {
   iteration: number;
 }
-
-const p1Strategy = (state: GameState) => {
-  if (state.p2Cooperated) {
-    return true;
-  }
-
-  return false;
-};
-
-const p2Strategy = (state: GameState) => {
-  console.log('iteration', state.iteration);
-  if (state.iteration % 2 === 0) {
-    return true;
-  }
-
-  return false;
-};
 
 export default class Game {
   p1: Player;
@@ -34,7 +18,7 @@ export default class Game {
   @tracked iteration = 0;
   @tracked gameStateHistory: Array<GameState> = [];
 
-  constructor() {
+  constructor(p1Strategy: Strategy, p2Strategy: Strategy) {
     this.p1 = new Player('p1', p1Strategy);
     this.p2 = new Player('p2', p2Strategy);
   }
@@ -52,26 +36,36 @@ export default class Game {
 
   // player 1 cooperates
   //   player 2 cooperates
-  //     -1 / -1
+  //     +2 / +2
   //   player 2 defects
-  //     -3 / 0
+  //     0 / +5
   // player 2 cooperates
   //   player 1 cooperates
-  //     -1 / -1
+  //     +2 / +2
   //   player 1 defects
-  //     0 / -3
+  //     +5 / 0
+  // player 1 defects
+  //   player 2 defects
+  //     +1 / +1
   calculatePayoff(p1Cooperated: boolean, p2Cooperated: boolean) {
     if (p1Cooperated && p2Cooperated) {
-      this.p1.score = this.p1.score + 1;
-      this.p2.score = this.p2.score + 1;
+      this.p1.score = this.p1.score + 2;
+      this.p2.score = this.p2.score + 2;
     }
 
+    // p1 cooperates but p2 defects
     if (p1Cooperated && !p2Cooperated) {
       this.p2.score = this.p2.score + 3;
     }
 
+    // p1 defects but p2 cooperates
     if (!p1Cooperated && p2Cooperated) {
       this.p1.score = this.p1.score + 3;
+    }
+
+    if (!p1Cooperated && !p2Cooperated) {
+      this.p1.score = this.p1.score + 1;
+      this.p2.score = this.p2.score + 1;
     }
   }
 
@@ -96,10 +90,6 @@ export default class Game {
     console.log(gameState);
 
     this.gameStateHistory = [...this.gameStateHistory, gameState];
-
-    // this.gameStateHistory.push(gameState);
-
-    // this.gameStateHistory = this.gameStateHistory;
 
     this.calculatePayoff(p1Cooperated, p2Cooperated);
 
