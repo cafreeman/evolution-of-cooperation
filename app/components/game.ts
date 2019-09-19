@@ -1,13 +1,25 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import {
+  MassiveRetaliation,
+  Pollyanna,
+  TitForTat,
+  TotalAnnihilation,
+  TotallyRandom,
+} from 'eoc/lib/strategies';
 import Game from '../lib/Game';
-import { TotalAnnihilation, Pollyanna, TitForTat, TotallyRandom } from 'eoc/lib/strategies';
 
 interface GameArgs {}
 
 export default class GameComponent extends Component<GameArgs> {
-  @tracked strategies = [TitForTat, TotallyRandom, TotalAnnihilation, Pollyanna];
+  @tracked strategies = [
+    TitForTat,
+    TotallyRandom,
+    TotalAnnihilation,
+    Pollyanna,
+    MassiveRetaliation,
+  ];
 
   @tracked game = new Game(this.strategies[0], this.strategies[0]);
 

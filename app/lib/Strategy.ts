@@ -1,10 +1,11 @@
-import { GameState } from './Game';
+import { PlayerSpecificGameState } from './Player';
 
-type StrategyImpl = (state: GameState) => boolean;
+export type StrategyOutcome = boolean | [boolean, Dict<any>];
+type StrategyImpl = (state?: PlayerSpecificGameState) => StrategyOutcome;
 
 export default class Strategy {
   name: string;
-  impl: (state: GameState) => boolean;
+  impl: StrategyImpl;
 
   constructor(name: string, impl: StrategyImpl) {
     this.name = name;

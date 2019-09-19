@@ -4,12 +4,8 @@ import Strategy from './Strategy';
 
 export interface GameState {
   iteration: number;
-  p1Cooperated?: boolean;
-  p2Cooperated?: boolean;
-}
-
-export interface InitialGameState {
-  iteration: number;
+  p1Cooperated: boolean;
+  p2Cooperated: boolean;
 }
 
 export default class Game {
@@ -55,12 +51,12 @@ export default class Game {
 
     // p1 cooperates but p2 defects
     if (p1Cooperated && !p2Cooperated) {
-      this.p2.score = this.p2.score + 3;
+      this.p2.score = this.p2.score + 5;
     }
 
     // p1 defects but p2 cooperates
     if (!p1Cooperated && p2Cooperated) {
-      this.p1.score = this.p1.score + 3;
+      this.p1.score = this.p1.score + 5;
     }
 
     if (!p1Cooperated && !p2Cooperated) {
@@ -77,8 +73,8 @@ export default class Game {
       p1Cooperated = this.p1.cooperates(this.previousRound);
       p2Cooperated = this.p2.cooperates(this.previousRound);
     } else {
-      p1Cooperated = this.p1.cooperates({ iteration: this.iteration });
-      p2Cooperated = this.p2.cooperates({ iteration: this.iteration });
+      p1Cooperated = this.p1.cooperates();
+      p2Cooperated = this.p2.cooperates();
     }
 
     let gameState = {

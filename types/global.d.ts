@@ -1,6 +1,8 @@
 // Types for compiled templates
-declare module 'eoc/templates/*' { 
+declare module 'eoc/templates/*' {
   import { TemplateFactory } from 'htmlbars-inline-precompile';
   const tmpl: TemplateFactory;
   export default tmpl;
 }
+
+type Dict<T> = { [key: string]: T };
