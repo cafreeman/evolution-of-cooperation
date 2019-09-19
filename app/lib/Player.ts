@@ -49,4 +49,9 @@ export default class Player {
 
     return response;
   }
+
+  reset() {
+    this.score = 0;
+    this.notes = {};
+  }
 }

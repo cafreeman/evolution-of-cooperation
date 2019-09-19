@@ -83,12 +83,17 @@ export default class Game {
       p2Cooperated,
     };
 
-    console.log(gameState);
-
     this.gameStateHistory = [...this.gameStateHistory, gameState];
 
     this.calculatePayoff(p1Cooperated, p2Cooperated);
 
     this.iteration++;
+  }
+
+  reset() {
+    this.iteration = 0;
+    this.gameStateHistory = [];
+    this.p1.reset();
+    this.p2.reset();
   }
 }
