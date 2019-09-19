@@ -43,5 +43,13 @@ module.exports = {
       }),
       extends: ['plugin:node/recommended'],
     },
+    {
+      files: ['**/*.ts'],
+      rules: {
+        // These are covered by tsc
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
+      },
+    },
   ],
 };

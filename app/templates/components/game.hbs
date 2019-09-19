@@ -4,8 +4,12 @@
   <p>Player 1: {{this.game.score.p1}}</p>
   <p>Player 2: {{this.game.score.p2}}</p>
   <p>
+  {{#if (gt this.game.iteration 0)}}
     In the last round, Player 1 {{if this.game.previousRound.p1Cooperated 'cooperated' 'defected'}}
     and Player 2 {{if this.game.previousRound.p2Cooperated 'cooperated' 'defected'}}
+  {{else}}
+    Click "Run" to start the game!
+  {{/if}}
   </p>
 </div>
 

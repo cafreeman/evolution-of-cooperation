@@ -12,6 +12,12 @@ import Game from '../lib/Game';
 
 interface GameArgs {}
 
+const wait = (delay: number) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, delay);
+  });
+};
+
 export default class GameComponent extends Component<GameArgs> {
   @tracked strategies = [
     TitForTat,
@@ -24,8 +30,15 @@ export default class GameComponent extends Component<GameArgs> {
   @tracked game = new Game(this.strategies[0], this.strategies[0]);
 
   @action
-  play() {
+  async play() {
+    console.log('play');
     this.game.run();
+
+    for (let i = 0; i < 20; i++) {
+      console.log('on iteration ', i);
+      await wait(500);
+      this.game.run();
+    }
   }
 
   @action
