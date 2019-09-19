@@ -1,0 +1,11 @@
+{{log @p1Score}}
+{{log @p2Score}}
+<div style="height: 400px; width: 400px;">
+  <canvas
+    id="myChart"
+    width="400"
+    height="400"
+    {{did-insert this.mountChart}}
+    {{did-update this.updateChart @p1Score @p2Score}}
+  />
+</div>

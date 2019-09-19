@@ -13,8 +13,8 @@ export interface InitialGameState {
 }
 
 export default class Game {
-  p1: Player;
-  p2: Player;
+  @tracked p1: Player;
+  @tracked p2: Player;
   @tracked iteration = 0;
   @tracked gameStateHistory: Array<GameState> = [];
 
