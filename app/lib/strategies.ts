@@ -29,7 +29,7 @@ const massiveRetaliation = (state?: PlayerSpecificGameState): StrategyOutcome =>
   }
 
   if (state.notes.theyEverDefected) {
-    // NO QUARTER
+    // NO QUARTER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     return false;
   }
 

@@ -26,13 +26,31 @@
 </div>
 
 <div class="flex justify-center">
-  <button
-    type="button"
-    class="btn-blue"
-    {{on 'click' this.play}}
+  {{#if this.play.isRunning}}
+    <button
+      type="button"
+      class="btn-blue"
+      {{on 'click' this.cancel}}
     >
-    Run
-  </button>
+      Cancel
+    </button>
+  {{else if this.canBeReset}}
+    <button
+      type="button"
+      class="btn-blue"
+      {{on 'click' this.reset}}
+    >
+      Reset
+    </button>
+  {{else}}
+    <button
+      type="button"
+      class="btn-blue"
+      {{on 'click' (perform this.play)}}
+    >
+      Run
+    </button>
+  {{/if}}
 </div>
 
 <div class="flex items-center justify-center">

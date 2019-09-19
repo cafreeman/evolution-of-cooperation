@@ -63,6 +63,7 @@ export default class ScoreChart extends Component<ScoreChartArgs> {
             {
               ticks: {
                 beginAtZero: true,
+                max: 80,
               },
             },
           ],
