@@ -16,8 +16,8 @@ interface GameArgs {}
 
 export default class GameComponent extends Component<GameArgs> {
   @tracked strategies = [
-    TitForTat,
     TotallyRandom,
+    TitForTat,
     TotalAnnihilation,
     Pollyanna,
     MassiveRetaliation,
@@ -36,6 +36,8 @@ export default class GameComponent extends Component<GameArgs> {
       yield timeout(500);
       this.game.run();
     }
+
+    this.canBeReset = true;
   }
 
   @action
@@ -49,18 +51,6 @@ export default class GameComponent extends Component<GameArgs> {
     this.game.reset();
     this.canBeReset = false;
   }
-
-  // @action
-  // async play() {
-  //   console.log('play');
-  //   this.game.run();
-
-  //   for (let i = 0; i < 20; i++) {
-  //     console.log('on iteration ', i);
-  //     await wait(500);
-  //     this.game.run();
-  //   }
-  // }
 
   @action
   updateP1Strategy(value: string) {
